@@ -15,6 +15,6 @@ static void BM_Insert(benchmark::State &state)
         }
     }
 }
-BENCHMARK(BM_Insert)->Range(1, 1 << 4);
+BENCHMARK(BM_Insert)->Range(1<<4, 1 << 8);
 
 BENCHMARK_MAIN();
