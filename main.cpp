@@ -15,6 +15,17 @@ static void BM_Insert(benchmark::State &state)
         }
     }
 }
-BENCHMARK(BM_Insert)->Range(1<<4, 1 << 8);
+BENCHMARK(BM_Insert)->DenseRange(0, 1024, 128);
+
+static void BM_InitVec(benchmark::State &state)
+{
+    for (auto _ : state)
+    {
+        std::vector<int> v(state.range(0), state.range(0));
+        benchmark::DoNotOptimize(v.data());
+        benchmark::ClobberMemory();
+    }
+}
+BENCHMARK(BM_InitVec)->DenseRange(0, 1024, 128);
 
 BENCHMARK_MAIN();
